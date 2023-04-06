@@ -68,3 +68,21 @@ def check_win(player1, player2, board):
                 winning_player = player2
 
     return winning_player
+
+def check_play_again(play_again):
+    user_input = input('Would you like to play again? (Y/N) ')
+    yes = ['Yes', 'yes', 'Y', 'y']
+    no = ['No', 'no', 'N', 'n']
+    valid = False
+
+    while valid == False:
+        if user_input in no:
+            play_again = False
+            valid = True
+        elif user_input in yes:
+            play_again = True
+            valid = True
+        else:
+            user_input = input('Please only enter yes or no: ')
+
+    return play_again
