@@ -8,6 +8,10 @@ def current_turn(player1, player2, current_player):
 
     return current_player
 
+def update_board(board, position, player_symbol):
+    board[position] = f" {player_symbol} "
+    return board
+
 def player_one_turn(player1, accepted_moves, used_moves, board):
     player1_str = input(f'{player1}\'s turn: ')
     valid_move = False
@@ -61,7 +65,7 @@ def check_win(player1, player2, board):
             else: 
                 winning_player = player2
 
-    if board['a1'] == board['b2'] == board['c3'] or board['a3'] == board['b2'] == board['c1'] and board[f'b2'] != ' - ':
+    if (board['a1'] == board['b2'] == board['c3'] or board['a3'] == board['b2'] == board['c1']) and board[f'b2'] != ' - ':
             if board[f'b2'] == ' X ':
                 winning_player = player1
             else: 
@@ -69,20 +73,13 @@ def check_win(player1, player2, board):
 
     return winning_player
 
-def check_play_again(play_again):
-    user_input = input('Would you like to play again? (Y/N) ')
-    yes = ['Yes', 'yes', 'Y', 'y']
-    no = ['No', 'no', 'N', 'n']
-    valid = False
+def check_play_again(reset_button):
+    user_input = reset_button
+    play_again = False
 
-    while valid == False:
-        if user_input in no:
-            play_again = False
-            valid = True
-        elif user_input in yes:
-            play_again = True
-            valid = True
-        else:
-            user_input = input('Please only enter yes or no: ')
+    if user_input == 'yes':
+        play_again = True
+    elif user_input == 'no':
+        play_again = False
 
     return play_again

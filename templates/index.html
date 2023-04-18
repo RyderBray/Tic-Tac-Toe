@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    {% if winner %}
+        <p>Winner: {{ winner }}</p>
+        <p>Player 1 Wins: {{ player1_wins }}</p>
+        <p>Player 2 Wins: {{ player2_wins }}</p>
+        <p>Current player: {{ current_player }}</p>
+    {% elif tie %}
+        <p>It's a tie!</p>
+    {% else %}
+        <p>Current player: {{ current_player }}</p>
+    {% endif %}
+    <table>
+        <tr>
+            <td><form method="POST"><button class="game_button" name="position" value="a1" {% if board['a1'] %}{% endif %}>{{ board['a1'] }}</button></form></td>
+            <td><form method="POST"><button class="game_button" name="position" value="a2" {% if board['a2'] %}{% endif %}>{{ board['a2'] }}</button></form></td>
+            <td><form method="POST"><button class="game_button" name="position" value="a3" {% if board['a3'] %}{% endif %}>{{ board['a3'] }}</button></form></td>
+        </tr>
+        <tr>
+            <td><form method="POST"><button class="game_button" name="position" value="b1" {% if board['b1'] %}{% endif %}>{{ board['b1'] }}</button></form></td>
+            <td><form method="POST"><button class="game_button" name="position" value="b2" {% if board['b2'] %}{% endif %}>{{ board['b2'] }}</button></form></td>
+            <td><form method="POST"><button class="game_button" name="position" value="b3" {% if board['b3'] %}{% endif %}>{{ board['b3'] }}</button></form></td>
+        </tr>
+        <tr>
+            <td><form method="POST"><button class="game_button" name="position" value="c1" {% if board['c1'] %}{% endif %}>{{ board['c1'] }}</button></form></td>
+            <td><form method="POST"><button class="game_button" name="position" value="c2" {% if board['c2'] %}{% endif %}>{{ board['c2'] }}</button></form></td>
+            <td><form method="POST"><button class="game_button" name="position" value="c3" {% if board['c3'] %}{% endif %}>{{ board['c3'] }}</button></form></td>
+        </tr>
+    </table>
+    <div class="reset_board">
+        <form class="button_padding" method="POST"><button class="lower_buttons" name="play_again" value="yes">Reset Board</button></form><form class="button_padding" method="POST"><button class="lower_buttons" name="reset_wins" value="True">Reset Wins</button></form>
+    </div>
+</body>
+</html>
