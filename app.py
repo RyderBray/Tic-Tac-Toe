@@ -3,7 +3,7 @@ from game_functions import *
 
 app = Flask(__name__)
 
-#Setting up board
+#Setting up boards
 empty_board = {
     'a1': ' - ', 'a2': ' - ', 'a3': ' - ',
     'b1': ' - ', 'b2': ' - ', 'b3': ' - ',
@@ -54,7 +54,7 @@ def tic_tac_toe():
     #If the request method is POST, then a move has been made
     if request.method == 'POST':
 
-        if winner != None or len(used_moves) == len(accepted_moves):
+        if winner != None or used_moves == 9:
             return render_template('index.html', board = board, winner = winner, tie = True, player1_wins = player1_wins, player2_wins = player2_wins, current_player = current_player, player1 = player1, player2 = player2)
 
         position = request.form.get('position')
@@ -75,12 +75,10 @@ def tic_tac_toe():
         if winner != None:
             if winner == player1:
                 player1_wins += 1
-                print('Player one wins', player1_wins)
             else:
                 player2_wins += 1
-                print('Player two wins')
             return render_template('index.html', board = board, winner = winner, player1_wins = player1_wins, player2_wins = player2_wins, player1 = player1, player2 = player2)
-        elif len(used_moves) == len(accepted_moves):
+        elif len(used_moves) == 9:
             return render_template('index.html', board = board, tie = True, player1 = player1, player2 = player2)
 
         #Switch to the other player's turn
